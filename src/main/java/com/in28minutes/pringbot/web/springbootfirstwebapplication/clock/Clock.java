@@ -4,6 +4,7 @@
 package com.in28minutes.pringbot.web.springbootfirstwebapplication.clock;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -15,13 +16,12 @@ import java.util.Date;
 public class Clock {
 
 	private Date startTime = new Date();
-	private Date endTime = new Date();
+	private Date endTime;
 	private long shiftTime;
 	private long weeklyTime;
+	private ArrayList<Long> list  = new ArrayList<Long>(); 
 	
-	public Clock() {
-		
-	}
+	public Clock() {}
 
 	public Date getStartTime() {
 		return startTime;
@@ -55,28 +55,28 @@ public class Clock {
 		this.weeklyTime = weeklyTime;
 	}
 	
-	private long calcShift(Date start, Date end) {
+	private long calcShiftTime(Date start, Date end) {
 		long startTime = start.getTime();
 		long endTime = end.getTime();
 		long shiftTime = endTime - startTime;
 		
-		setShiftTime(shiftTime);
-		
+		list.add(shiftTime);
+		System.out.println(shiftTime + " Shift");
 		return shiftTime;
 	}
 	
-	private long calcWeeklyTime(long shiftTime) {
-		shiftTime = getShiftTime();
-		shiftTime += weeklyTime;
+	private long calcWeeklyTime() {
+		long sum = 0;
+		for (int i = 0; i < list.size(); i++) {
+			sum += list.get(i);
+		}
 		
-		return weeklyTime;
+		return sum;
 	}
 	
 	public long endShift(Date start, Date end) {
-		long week = calcWeeklyTime(calcShift(start, end));
-		setWeeklyTime(week);
-		
-		return getWeeklyTime();
+		calcShiftTime(start, end);
+		return calcWeeklyTime();
 	}
 
 	
