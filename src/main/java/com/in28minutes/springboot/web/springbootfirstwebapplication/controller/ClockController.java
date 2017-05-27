@@ -36,7 +36,7 @@ public class ClockController {
 	}
 	
 	@RequestMapping(value="/time", method = RequestMethod.POST)
-	public String userClockIn(ModelMap model, @Valid Clock clock, BindingResult result) {
+	public String userClockIn(ModelMap model, BindingResult result) {
 		if (result.hasErrors()) {
 			return "clockin";
 		}

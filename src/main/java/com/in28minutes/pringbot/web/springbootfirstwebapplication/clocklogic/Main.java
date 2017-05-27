@@ -1,4 +1,4 @@
-package com.in28minutes.pringbot.web.springbootfirstwebapplication.clock;
+package com.in28minutes.pringbot.web.springbootfirstwebapplication.clocklogic;
 
 import java.util.Date;
 import java.util.Scanner;
@@ -10,7 +10,7 @@ public class Main {
 		
 		
 		Scanner scannerIn = new Scanner(System.in);
-		Clock clock = new Clock();
+		ClockLogic clock = new ClockLogic();
 		String y = null;
 		String y2 = null;
 		Date s;
@@ -25,8 +25,8 @@ public class Main {
 			System.out.println(s = new Date());
 			y2 = scannerIn.next();
 			if (y2.equals("y")) {
-			System.out.println(e = new Date());
-			System.out.println(clock.endShift(s, e));
+				System.out.println(e = new Date());
+				System.out.println(clock.endShift(s, e));
 			}
 		}
 		

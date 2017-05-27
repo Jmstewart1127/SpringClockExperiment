@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.in28minutes.pringbot.web.springbootfirstwebapplication.clock;
+package com.in28minutes.pringbot.web.springbootfirstwebapplication.clocklogic;
 
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import java.util.Date;
  * Handles Logic
  *
  */
-public class Clock {
+public class ClockLogic {
 
 	private Date startTime = new Date();
 	private Date endTime;
@@ -21,7 +21,7 @@ public class Clock {
 	private long weeklyTime;
 	private ArrayList<Long> list  = new ArrayList<Long>(); 
 	
-	public Clock() {}
+	public ClockLogic() {}
 
 	public Date getStartTime() {
 		return startTime;
