@@ -1,11 +1,16 @@
 package com.in28minutes.springboot.web.springbootfirstwebapplication.model;
 
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-import org.joda.time.DateTime;
-
+@Entity
 public class Clock {
 	
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	private String user;
 	private Date clockIn;
@@ -13,7 +18,7 @@ public class Clock {
 	private long shiftTime; 
 	private long weekTime;
 	
-	Clock() {
+	public Clock() {
 		super();
 	}
 	
@@ -23,6 +28,16 @@ public class Clock {
 		this.id = id;
 		this.user = user;
 		this.clockIn = clockIn;
+	}
+	
+	public Clock(String user, Date clockOut, long shiftTime, 
+			long weekTime) {
+		
+		super();
+		this.user = user;
+		this.clockOut = clockOut;
+		this.shiftTime = shiftTime;
+		this.weekTime = weekTime;
 	}
 	
 	public Clock(int id, String user, Date clockIn, Date clockOut, long shiftTime, 

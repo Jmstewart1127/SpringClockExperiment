@@ -7,7 +7,6 @@ import java.util.List;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 import com.in28minutes.springboot.web.springbootfirstwebapplication.model.Clock;
-import com.in28minutes.springboot.web.springbootfirstwebapplication.model.Todo;
 
 @Service
 public class ClockService {
@@ -25,10 +24,32 @@ public class ClockService {
     }
 	
     public void clockIn(String name, Date start) {
-        clock.add(new Clock(clockCount++, name, start));
+        
     }
     
-    public void clockOut(String name, Date end, )
+    public void clockOut(String name, Date end, long shiftTime, long weekTime) {
+    	retrieveClocks(name).add(new Clock(name, end, shiftTime, weekTime));
+    }
+    
+    public List<Clock> retrieveClocks(String user) {
+        List<Clock> filteredClock = new ArrayList<Clock>();
+        for (Clock clock : clock) {
+            if (clock.getUser().equals(user)) {
+                filteredClock.add(clock);
+            }
+        }
+        return filteredClock;
+    }
+    
+    public List<Clock> retrieveStart(String user) {
+        List<Clock> filteredClock = new ArrayList<Clock>();
+        for (Clock clock : clock) {
+            if (clock.getUser().equals(user)) {
+                filteredClock.add(clock);
+            }
+        }
+        return filteredClock;
+    }
 
 
 	public void clockIn(Object setClockIn) {
