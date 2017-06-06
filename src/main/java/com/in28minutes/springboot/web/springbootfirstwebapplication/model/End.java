@@ -18,22 +18,27 @@ public class End {
 	private long weekTime;
 	
 	public End() {}
-	
+
 	public Date getClockOut() {
 		return clockOut;
 	}
+	
 	public void setClockOut(Date clockOut) {
 		this.clockOut = clockOut;
 	}
+	
 	public long getShiftTime() {
 		return shiftTime;
 	}
+	
 	public void setShiftTime(long shiftTime) {
 		this.shiftTime = shiftTime;
 	}
+	
 	public long getWeekTime() {
 		return weekTime;
 	}
+	
 	public void setWeekTime(long weekTime) {
 		this.weekTime = weekTime;
 	}

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 import com.in28minutes.springboot.web.springbootfirstwebapplication.model.Clock;
 
@@ -23,9 +22,9 @@ public class ClockService {
                 100362, 133355333));
     }
 	
-    public void clockIn(String name, Date start) {
-        
-    }
+//    public void clockIn(String name, Date start) {
+//        clock.add(new Clock())
+//    }
     
     public void clockOut(String name, Date end, long shiftTime, long weekTime) {
     	retrieveClocks(name).add(new Clock(name, end, shiftTime, weekTime));
