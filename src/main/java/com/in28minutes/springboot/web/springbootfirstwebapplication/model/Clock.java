@@ -1,10 +1,13 @@
 package com.in28minutes.springboot.web.springbootfirstwebapplication.model;
 
 import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 public class Clock {
@@ -12,10 +15,15 @@ public class Clock {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
+    @Column(name = "user")
 	private String user;
+    @Column(name = "clock_in")
 	private Date clockIn;
+    @Column(name = "clock_out")
 	private Date clockOut;
+    @Column(name = "shift_time")
 	private long shiftTime; 
+    @Column(name = "week_time")
 	private long weekTime;
 	
 	public Clock() {
@@ -99,7 +107,6 @@ public class Clock {
 	public void setWeekTime(long weekTime) {
 		this.weekTime = weekTime;
 	}
-	
 	
 	
 }

@@ -1,11 +1,9 @@
 package com.in28minutes.springboot.web.springbootfirstwebapplication.controller;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.validation.Valid;
 
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +19,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.in28minutes.pringbot.web.springbootfirstwebapplication.clocklogic.ClockLogic;
 import com.in28minutes.springboot.web.springbootfirstwebapplication.model.Clock;
 import com.in28minutes.springboot.web.springbootfirstwebapplication.model.End;
-import com.in28minutes.springboot.web.springbootfirstwebapplication.model.Todo;
 import com.in28minutes.springboot.web.springbootfirstwebapplication.repository.ClockRepository;
 import com.in28minutes.springboot.web.springbootfirstwebapplication.repository.EndRepository;
 import com.in28minutes.springboot.web.springbootfirstwebapplication.service.ClockService;
@@ -39,9 +36,9 @@ public class ClockController {
 	@Autowired
 	EndRepository endRepository;
 	
-	private int getLoggedInUserId(ModelMap model) {
-		return (int) model.get("id");
-	}
+//	private int getLoggedInUserId(ModelMap model) {
+//		return (int) model.get("id");
+//	}
 	
 	@RequestMapping(value="/time",  method = RequestMethod.GET)
 	public String showClockInPage() {
@@ -71,18 +68,15 @@ public class ClockController {
 	}
 	
 	@GetMapping(path="/end") // Map ONLY GET Requests
-	public @ResponseBody String clockOut (@RequestParam String user) {
+	public @ResponseBody String clockOut (@RequestParam int id) {
 		Clock c = new Clock();
 		Date d = new Date();
 		ClockLogic cl = new ClockLogic();
+		Date e = new Date();
+		cl.endShift(d, e);
+		clockRepository.updateClock(id, e, cl.getShiftTime(), cl.getWeeklyTime());
+		clockRepository.save(c);
 		
-//		c.setClockOut(d);
-//		cl.endShift(c.getClockIn(), c.getClockOut());
-//		c.setShiftTime(cl.getShiftTime());
-//		c.setWeekTime(cl.getWeeklyTime());
-//		clockRepository.save(c);
-		List<Clock> retrieve = clockService.retrieveClocks(user);
-		System.out.println(retrieve);
 		return "Saved";
 	}
 	
