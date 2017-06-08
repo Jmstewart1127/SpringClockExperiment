@@ -1,5 +1,6 @@
 package com.in28minutes.springboot.web.springbootfirstwebapplication.repository;
 
+
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -15,10 +16,21 @@ import com.in28minutes.springboot.web.springbootfirstwebapplication.model.Clock;
 public interface ClockRepository extends CrudRepository <Clock, Long> {
 	Optional<Clock> findByUser(String user);
 	
-	List<Clock> findById(@Param("id") int id);
+//	List<Clock> findById(@Param("id") int id);
 	
-	@Query("SELECT clock_in FROM com.in28minutes.springboot.web.springbootfirstwebapplication.model.Clock WHERE id=:id")
-	Iterable<Clock> getStartTime(@Param("id")int id);
+	
+	@Query("SELECT clockIn FROM com.in28minutes.springboot.web.springbootfirstwebapplication.model.Clock WHERE id= :id")
+	Date findStartTimeById(@Param("id")int id);
+	
+	@Query("SELECT weekTime FROM com.in28minutes.springboot.web.springbootfirstwebapplication.model.Clock WHERE id= :id")
+	Long findWeekTimeById(@Param("id")int id);
+	
+	@Modifying
+	@Transactional
+	@Query("UPDATE com.in28minutes.springboot.web.springbootfirstwebapplication.model.Clock SET clock_in=:startTime WHERE id=:id")
+	void updateClock(@Param("id")int id, 
+			  @Param("startTime")Date startTime); 
+
 	
 	@Modifying
 	@Transactional

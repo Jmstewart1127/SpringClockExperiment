@@ -61,23 +61,23 @@ public class ClockLogic {
 		long shiftTime = endTime - startTime;
 		
 		list.add(shiftTime);
+		setShiftTime(shiftTime);
 		System.out.println(shiftTime + " Shift");
 		return shiftTime;
 	}
 	
-	private long calcWeeklyTime() {
+	public long calcWeeklyTime(long currentWeek, long shift) {
 		long sum = 0;
-		for (int i = 0; i < list.size(); i++) {
-			sum += list.get(i);
-		}
-		
-		return sum;
+		long toAdd = sum + shift;
+		toAdd += currentWeek;
+		setWeeklyTime(toAdd);
+		return toAdd;
 	}
 	
-	public long endShift(Date start, Date end) {
+	public void endShift(Date start, Date end) {
 		calcShiftTime(start, end);
-		return calcWeeklyTime();
 	}
+	
 
 	
 	

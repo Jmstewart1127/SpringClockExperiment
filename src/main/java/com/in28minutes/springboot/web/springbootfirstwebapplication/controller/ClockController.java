@@ -64,21 +64,28 @@ public class ClockController {
 		c.setUser(name);
 		c.setClockIn(d);
 		clockRepository.save(c);
+		
+		return "Saved";
+	}
+	
+	@GetMapping(path="/start") // Map ONLY GET Requests
+	public @ResponseBody String clockIn (@RequestParam int id) {
+		Date d = new Date();
+		clockRepository.updateClock(id, d);
+
 		return "Saved";
 	}
 	
 	@GetMapping(path="/end") // Map ONLY GET Requests
 	public @ResponseBody String clockOut (@RequestParam int id) {
-		Date d = new Date();
 		ClockLogic cl = new ClockLogic();
-		Date e = new Date();
-		cl.endShift(d, e);
-		clockRepository.updateClock(id, e, cl.getShiftTime(), cl.getWeeklyTime());
-		
-		
-		System.out.println("shift time= " + cl.getShiftTime());
-		System.out.println("week time= " + cl.getWeeklyTime());
-		
+		Date d = new Date();
+		cl.endShift(clockRepository.findStartTimeById(id), d);
+		long currentWeek = clockRepository.findWeekTimeById(id);
+		long shift = cl.getShiftTime();
+		cl.calcWeeklyTime(currentWeek, shift);
+		clockRepository.updateClock(id, d, cl.getShiftTime(), cl.getWeeklyTime());
+
 		return "Saved";
 	}
 	
