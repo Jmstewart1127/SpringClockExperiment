@@ -16,7 +16,10 @@ public interface ClockRepository extends CrudRepository <Clock, Long> {
 	Optional<Clock> findByUser(String user);
 	
 	List<Clock> findById(@Param("id") int id);
-	  
+	
+	@Query("SELECT clock_in FROM com.in28minutes.springboot.web.springbootfirstwebapplication.model.Clock WHERE id=:id")
+	Iterable<Clock> getStartTime(@Param("id")int id);
+	
 	@Modifying
 	@Transactional
 	@Query("UPDATE com.in28minutes.springboot.web.springbootfirstwebapplication.model.Clock SET clock_out=:endTime, shift_time=:shiftTime, week_time=:weeklyTime WHERE id=:id")

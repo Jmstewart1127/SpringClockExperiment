@@ -69,13 +69,15 @@ public class ClockController {
 	
 	@GetMapping(path="/end") // Map ONLY GET Requests
 	public @ResponseBody String clockOut (@RequestParam int id) {
-		Clock c = new Clock();
 		Date d = new Date();
 		ClockLogic cl = new ClockLogic();
 		Date e = new Date();
 		cl.endShift(d, e);
 		clockRepository.updateClock(id, e, cl.getShiftTime(), cl.getWeeklyTime());
-		clockRepository.save(c);
+		
+		
+		System.out.println("shift time= " + cl.getShiftTime());
+		System.out.println("week time= " + cl.getWeeklyTime());
 		
 		return "Saved";
 	}
