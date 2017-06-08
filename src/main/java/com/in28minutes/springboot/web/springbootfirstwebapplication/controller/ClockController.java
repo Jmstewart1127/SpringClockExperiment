@@ -60,9 +60,7 @@ public class ClockController {
 		// @ResponseBody means the returned String is the response, not a view name
 		// @RequestParam means it is a parameter from the GET or POST request
 		Clock c = new Clock();
-		Date d = new Date();
 		c.setUser(name);
-		c.setClockIn(d);
 		clockRepository.save(c);
 		
 		return "Saved";
