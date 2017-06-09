@@ -2,7 +2,6 @@ package com.in28minutes.springboot.web.springbootfirstwebapplication.repository;
 
 
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Modifying;

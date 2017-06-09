@@ -15,6 +15,8 @@ public class Clock {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
+    @Column(name = "biz_id")
+    private int bizId;
     @Column(name = "user")
 	private String user;
     @Column(name = "clock_in")
@@ -66,6 +68,14 @@ public class Clock {
 	
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public int getBizId() {
+		return bizId;
+	}
+	
+	public void setBizId(int bizId) {
+		this.bizId = bizId;
 	}
 	
 	public String getUser() {

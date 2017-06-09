@@ -18,9 +18,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.in28minutes.pringbot.web.springbootfirstwebapplication.clocklogic.ClockLogic;
 import com.in28minutes.springboot.web.springbootfirstwebapplication.model.Clock;
-import com.in28minutes.springboot.web.springbootfirstwebapplication.model.End;
 import com.in28minutes.springboot.web.springbootfirstwebapplication.repository.ClockRepository;
-import com.in28minutes.springboot.web.springbootfirstwebapplication.repository.EndRepository;
 import com.in28minutes.springboot.web.springbootfirstwebapplication.service.ClockService;
 
 @Controller
@@ -33,9 +31,6 @@ public class ClockController {
 	@Autowired
 	ClockRepository clockRepository;
 	
-	@Autowired
-	EndRepository endRepository;
-	
 //	private int getLoggedInUserId(ModelMap model) {
 //		return (int) model.get("id");
 //	}
@@ -44,16 +39,6 @@ public class ClockController {
 	public String showClockInPage() {
         return "clockin";
 	}
-	
-//	@RequestMapping(value="/time", method = RequestMethod.POST)
-//	public String userClockIn(ModelMap model) {
-//		if (result.hasErrors()) {
-//			return "clockin";
-//		}
-//		
-//		service.clockIn(getLoggedInUserName(model), new Date());
-//        return "redirect:/showtime";
-//	}
 	
 	@GetMapping(path="/add") // Map ONLY GET Requests
 	public @ResponseBody String addNewUser (@RequestParam String name) {
@@ -106,9 +91,5 @@ public class ClockController {
 		return clockRepository.findAll();
 	}
 	
-	@GetMapping(path="/alltime")
-	public @ResponseBody Iterable<End> getAll() {
-		// This returns a JSON or XML with the users
-		return endRepository.findAll();
-	}
+
 }
