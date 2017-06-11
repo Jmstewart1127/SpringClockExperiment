@@ -11,5 +11,6 @@ public interface BusinessRepository extends CrudRepository <Business, Long> {
 	
 	Business findByBizName(String bizName);
 	
+	Business findByConfirmationToken(String confirmationToken);
 	
 }

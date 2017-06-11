@@ -20,6 +20,10 @@ public class BusinessService {
 		return businessRepository.findByBizName(bizName);
 	}
 	
+	public Business findByConfirmationToken(String confirmationToken) {
+		return businessRepository.findByConfirmationToken(confirmationToken);
+	}
+	
 	public void saveBusiness(Business business) {
 		businessRepository.save(business);
 	}
