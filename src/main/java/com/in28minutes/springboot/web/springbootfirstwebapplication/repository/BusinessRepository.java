@@ -6,5 +6,10 @@ import com.in28minutes.springboot.web.springbootfirstwebapplication.model.Busine
 
 
 public interface BusinessRepository extends CrudRepository <Business, Long> {
-
+	
+	Business findById(int id);
+	
+	Business findByBizName(String bizName);
+	
+	
 }

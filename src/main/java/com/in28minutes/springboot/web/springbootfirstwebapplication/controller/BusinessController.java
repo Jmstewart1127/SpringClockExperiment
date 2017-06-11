@@ -24,37 +24,26 @@ public class BusinessController {
 		return (int) model.get("id");
 	}
 	
-//	@GetMapping(path="/newbusiness")
-//	public String newBiz () {
-//		return "newbusiness";
-//	}
-//	
-//	
-//	@PostMapping(path="/newbusiness") // Map ONLY GET Requests
-//	public String addNewBusiness (@RequestParam String adminName, @RequestParam String bizName, 
-//			@RequestParam String password, @RequestParam String password1) {
-//		
-//		if (password.equals(password1)) {
-//			Business b = new Business();
-//			b.setAdminName(adminName);
-//			b.setBizName(bizName);
-//			b.setPassword(password);
-//			businessRepository.save(b);
-//		}
-//		
-//		return "welcome";
-//	}
+	@GetMapping(path="/newbusiness")
+	public String newBiz () {
+		return "newbusiness";
+	}
 	
 	
-    @GetMapping("/newbusiness")
-    public String greetingForm(Model model) {
-        model.addAttribute("business", new Business());
-        return "newbusiness";
-    }
-
-    @PostMapping("/newbusiness")
-    public String greetingSubmit(@ModelAttribute Business business) {
-        return "test";
-    }
+	@PostMapping(path="/newbusiness") // Map ONLY GET Requests
+	public String addNewBusiness (@RequestParam String adminName, @RequestParam String bizName, 
+			@RequestParam String password, @RequestParam String password1) {
+		
+		if (password.equals(password1)) {
+			Business b = new Business();
+			b.setAdminName(adminName);
+			b.setBizName(bizName);
+			b.setPassword(password);
+			businessRepository.save(b);
+		}
+		
+		return "welcome";
+	}
+	
 	
 }

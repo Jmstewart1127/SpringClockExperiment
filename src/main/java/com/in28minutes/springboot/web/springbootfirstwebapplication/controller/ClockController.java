@@ -1,14 +1,7 @@
 package com.in28minutes.springboot.web.springbootfirstwebapplication.controller;
 
-import java.util.Date;
-
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.in28minutes.pringbot.web.springbootfirstwebapplication.clocklogic.ClockLogic;
 import com.in28minutes.springboot.web.springbootfirstwebapplication.model.Clock;
 import com.in28minutes.springboot.web.springbootfirstwebapplication.repository.ClockRepository;
 import com.in28minutes.springboot.web.springbootfirstwebapplication.service.ClockService;
@@ -31,10 +23,6 @@ public class ClockController {
 	@Autowired
 	ClockRepository clockRepository;
 	
-//	private int getLoggedInUserId(ModelMap model) {
-//		return (int) model.get("id");
-//	}
-	
 	@RequestMapping(value="/time",  method = RequestMethod.GET)
 	public String showClockInPage() {
         return "clockin";
@@ -44,46 +32,24 @@ public class ClockController {
 	public @ResponseBody String addNewUser (@RequestParam String name) {
 		// @ResponseBody means the returned String is the response, not a view name
 		// @RequestParam means it is a parameter from the GET or POST request
-		Clock c = new Clock();
-		c.setUser(name);
-		clockRepository.save(c);
+		clockService.addNewUser(name);
 		
 		return "Saved";
 	}
 	
 	@GetMapping(path="/start") // Map ONLY GET Requests
 	public @ResponseBody String clockIn (@RequestParam int id) {
-		Date d = new Date();
-		clockRepository.updateClock(id, d);
+		clockService.clockIn(id);
 
 		return "Saved";
 	}
 	
 	@GetMapping(path="/end") // Map ONLY GET Requests
 	public @ResponseBody String clockOut (@RequestParam int id) {
-		ClockLogic cl = new ClockLogic();
-		Date d = new Date();
-		cl.endShift(clockRepository.findStartTimeById(id), d);
-		long currentWeek = clockRepository.findWeekTimeById(id);
-		long shift = cl.getShiftTime();
-		cl.calcWeeklyTime(currentWeek, shift);
-		clockRepository.updateClock(id, d, cl.getShiftTime(), cl.getWeeklyTime());
+		clockService.clockOut(id);
 
 		return "Saved";
 	}
-	
-//	@GetMapping(path="/out") // Map ONLY GET Requests
-//	public @ResponseBody String clockOut (@RequestParam String user) {
-//		End e = new End();
-//		Date d = new Date();
-//		ClockLogic cl = new ClockLogic();
-//
-//		e.setClockOut(d);
-//		e.setShiftTime(cl.getShiftTime());
-//		e.setWeekTime(cl.getWeeklyTime());
-//		
-//		return "Saved";
-//	}
 	
 	@GetMapping(path="/all")
 	public @ResponseBody Iterable<Clock> getAllUsers() {
