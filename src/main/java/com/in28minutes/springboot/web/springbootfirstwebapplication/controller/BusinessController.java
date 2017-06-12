@@ -80,7 +80,8 @@ public class BusinessController {
 		
 		// Process form input data
 		@RequestMapping(value = "/register", method = RequestMethod.POST)
-		public ModelAndView processRegistrationForm(ModelAndView modelAndView, @Valid Business business, BindingResult bindingResult, HttpServletRequest request) {
+		public ModelAndView processRegistrationForm(ModelAndView modelAndView, 
+				@Valid Business business, BindingResult bindingResult, HttpServletRequest request) {
 					
 			// Lookup user in database by id
 			Business businessExists = businessService.findById(business.getId());
@@ -88,7 +89,8 @@ public class BusinessController {
 			System.out.println(businessExists);
 			
 			if (businessExists != null) {
-				modelAndView.addObject("alreadyRegisteredMessage", "Oops!  There is already a user registered with the email provided.");
+				modelAndView.addObject("alreadyRegisteredMessage", 
+						"Oops!  There is already a user registered with the email provided.");
 				modelAndView.setViewName("register");
 				bindingResult.reject("email");
 			}

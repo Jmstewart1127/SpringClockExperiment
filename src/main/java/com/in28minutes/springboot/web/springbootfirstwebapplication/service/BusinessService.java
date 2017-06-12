@@ -11,7 +11,7 @@ public class BusinessService {
 	
 	@Autowired
 	BusinessRepository businessRepository;
-	
+
 	public Business findById(int id) {
 		return businessRepository.findById(id);
 	}
