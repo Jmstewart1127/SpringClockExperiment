@@ -24,6 +24,14 @@ public class BusinessService {
 		return businessRepository.findByConfirmationToken(confirmationToken);
 	}
 	
+	public Business findByEmail(String email) {
+		return businessRepository.findByEmail(email);
+	}
+	
+	public Business findByPassword(String password) {
+		return businessRepository.findByPassword(password);
+	}
+	
 	public void saveBusiness(Business business) {
 		businessRepository.save(business);
 	}

@@ -143,7 +143,10 @@ public class BusinessController {
 		
 		// Process confirmation link
 		@RequestMapping(value="/confirm", method = RequestMethod.POST)
-		public ModelAndView processConfirmationForm(ModelAndView modelAndView, BindingResult bindingResult, @RequestParam Map requestParams, RedirectAttributes redir) {
+		public ModelAndView processConfirmationForm(ModelAndView modelAndView, 
+				BindingResult bindingResult, 
+				@RequestParam Map requestParams, 
+				RedirectAttributes redir) {
 					
 			modelAndView.setViewName("confirm");
 			
@@ -176,5 +179,27 @@ public class BusinessController {
 			modelAndView.addObject("successMessage", "Your password has been set!");
 			return modelAndView;		
 		}
-	
+		
+		@RequestMapping(value="/login", method = RequestMethod.GET)
+		public ModelAndView loginBusiness(ModelAndView modelAndView, 
+				BindingResult bindingResult, 
+				@RequestParam Map requestParams, 
+				RedirectAttributes redir) {
+			
+			modelAndView.setViewName("login");
+			
+			String email = (String) requestParams.get("email");
+			String password = (String) requestParams.get("password");
+			
+			// find users by email
+			businessService.findByEmail(email);
+			
+			// find user by password
+			businessService.findByPassword(password);
+			
+			
+			return modelAndView;
+		}
 }
+	
+
