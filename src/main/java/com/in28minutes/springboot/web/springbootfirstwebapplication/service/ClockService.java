@@ -15,8 +15,9 @@ public class ClockService {
 	@Autowired
 	ClockRepository clockRepository;
 
-	public void addNewUser (String name) {
+	public void addNewUser (int bizId, String name) {
 		Clock c = new Clock();
+		c.setBizId(bizId);
 		c.setUser(name);
 		clockRepository.save(c);
 	}
@@ -34,6 +35,18 @@ public class ClockService {
 		long shift = cl.getShiftTime();
 		cl.calcWeeklyTime(currentWeek, shift);
 		clockRepository.updateClock(id, d, cl.getShiftTime(), cl.getWeeklyTime());
+	}
+	
+	public Clock findById(int id) {
+		return clockRepository.findById(id);
+	}
+	
+	public Clock findByUser(String user) {
+		return clockRepository.findByUser(user);
+	}
+	
+	public Clock saveClock(Clock clock) {
+		return clockRepository.save(clock);
 	}
 	
 	

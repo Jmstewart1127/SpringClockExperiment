@@ -13,8 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.in28minutes.springboot.web.springbootfirstwebapplication.model.Clock;
 
 public interface ClockRepository extends CrudRepository <Clock, Long> {
-	Optional<Clock> findByUser(String user);
 	
+	Clock findById(int id);
+	
+	Clock findByUser(String user);
 	
 	@Query("SELECT clockIn FROM com.in28minutes.springboot.web.springbootfirstwebapplication.model.Clock WHERE id= :id")
 	Date findStartTimeById(@Param("id")int id);

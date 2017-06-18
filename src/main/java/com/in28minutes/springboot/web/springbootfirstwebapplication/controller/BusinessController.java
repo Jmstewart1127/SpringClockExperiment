@@ -70,7 +70,7 @@ public class BusinessController {
 	}
 	
 	
-	// Return registration form template
+		// Return registration form template
 		@RequestMapping(value="/register", method = RequestMethod.GET)
 		public ModelAndView showRegistrationPage(ModelAndView modelAndView, Business business){
 			modelAndView.addObject("business", business);
