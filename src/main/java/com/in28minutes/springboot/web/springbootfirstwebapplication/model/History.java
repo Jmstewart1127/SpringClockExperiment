@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Clock {
+public class History {
 	
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -29,56 +29,26 @@ public class Clock {
     @Column(name = "is_clocked")
     private Boolean clocked;
 	
-	public Clock() {
-		super();
-	}
-	
-	public Clock(int id, String user, Date clockIn) {
-		
-		super();
-		this.id = id;
-		this.user = user;
-		this.clockIn = clockIn;
-	}
-	
-	public Clock(String user, Date clockOut, long shiftTime, 
-			long weekTime) {
-		
-		super();
-		this.user = user;
-		this.clockOut = clockOut;
-		this.shiftTime = shiftTime;
-		this.weekTime = weekTime;
-	}
-	
-	public Clock(int id, String user, Date clockIn, Date clockOut, long shiftTime, 
-			long weekTime) {
-		
-		super();
-		this.id = id;
-		this.user = user;
-		this.clockIn = clockIn;
-		this.clockOut = clockOut;
-		this.shiftTime = shiftTime;
-		this.weekTime = weekTime;
-	}
+    public History() {
+    	super();
+    }
 
 	public int getId() {
 		return id;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public int getBizId() {
 		return bizId;
 	}
-	
+
 	public void setBizId(int bizId) {
 		this.bizId = bizId;
 	}
-	
+
 	public String getUser() {
 		return user;
 	}
@@ -126,7 +96,6 @@ public class Clock {
 	public void setClocked(Boolean clocked) {
 		this.clocked = clocked;
 	}
-	
-	
-	
+    
+    
 }
