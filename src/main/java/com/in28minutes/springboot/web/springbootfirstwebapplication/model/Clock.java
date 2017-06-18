@@ -27,6 +27,8 @@ public class Clock {
 	private long shiftTime; 
     @Column(name = "week_time")
 	private long weekTime;
+    @Column(name = "is_clocked")
+    private Boolean clocked;
 	
 	public Clock() {
 		super();
@@ -117,6 +119,15 @@ public class Clock {
 	public void setWeekTime(long weekTime) {
 		this.weekTime = weekTime;
 	}
+
+	public Boolean getClocked() {
+		return clocked;
+	}
+
+	public void setClocked(Boolean clocked) {
+		this.clocked = clocked;
+	}
+	
 	
 	
 }
