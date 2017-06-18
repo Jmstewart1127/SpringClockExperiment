@@ -18,6 +18,11 @@ public interface ClockRepository extends CrudRepository <Clock, Long> {
 	
 	Clock findByUser(String user);
 	
+	Clock findByClocked(Boolean clocked);
+	
+	@Query("SELECT clocked FROM com.in28minutes.springboot.web.springbootfirstwebapplication.model.Clock WHERE id= :id")
+	Boolean findClockedById(@Param("id")int id);
+	
 	@Query("SELECT clockIn FROM com.in28minutes.springboot.web.springbootfirstwebapplication.model.Clock WHERE id= :id")
 	Date findStartTimeById(@Param("id")int id);
 	

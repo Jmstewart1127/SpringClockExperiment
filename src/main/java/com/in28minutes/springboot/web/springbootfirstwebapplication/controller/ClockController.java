@@ -55,15 +55,21 @@ public class ClockController {
 	
 	@GetMapping(path="/end") // Map ONLY GET Requests
 	public @ResponseBody String clockOut (@RequestParam int id) {
-		clockService.clockOut(id);
-
-		return "Saved";
+		Boolean isClocked = clockService.findClockedById(id);
+		
+		if (isClocked) {
+			clockService.clockOut(id);
+			return "Saved";
+		} else {
+			return "Clock In First";
+		}
 	}
 	
 	@RequestMapping(path="/adduser", method = RequestMethod.GET)
 	public ModelAndView showNewUserForm(ModelAndView modelAndView, Clock clock) {
 		modelAndView.addObject("clock", clock);
 		modelAndView.setViewName("newuser");
+		
 		return modelAndView;
 	}
 	
@@ -95,6 +101,34 @@ public class ClockController {
 		}
 			
 		return modelAndView;
+	}
+	
+	@RequestMapping(path="/clock", method = RequestMethod.GET)
+	public ModelAndView showClockForm(ModelAndView modelAndView, Clock clock) {
+		modelAndView.addObject("clock", clock);
+		modelAndView.setViewName("timeclock");
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/clock", method = RequestMethod.POST)
+	public ModelAndView processClockForm(ModelAndView modelAndView, 
+			@Valid Clock clock, BindingResult bindingResult, HttpServletRequest request) {
+		
+		modelAndView.setViewName("timeclock");
+		
+		int userId = clock.getId();
+		
+		Boolean isClocked = clockService.findClockedById(userId);
+		
+		if (isClocked) {
+			clockService.clockOut(userId);
+			return modelAndView;
+		} else {
+			clockService.clockIn(userId);
+			return modelAndView;
+		}
+
 	}
 	
 	

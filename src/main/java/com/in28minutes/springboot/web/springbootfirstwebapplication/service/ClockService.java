@@ -37,12 +37,20 @@ public class ClockService {
 		clockRepository.updateClock(id, d, cl.getShiftTime(), cl.getWeeklyTime());
 	}
 	
+	public Boolean findClockedById(int id) {
+		return clockRepository.findClockedById(id);
+	}
+	
 	public Clock findById(int id) {
 		return clockRepository.findById(id);
 	}
 	
 	public Clock findByUser(String user) {
 		return clockRepository.findByUser(user);
+	}
+	
+	public Clock findByClocked(Boolean clocked) {
+		return clockRepository.findByClocked(clocked);
 	}
 	
 	public Clock saveClock(Clock clock) {
