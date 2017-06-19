@@ -27,7 +27,7 @@ public class Clock {
     @Column(name = "week_time")
 	private long weekTime;
     @Column(name = "is_clocked")
-    private Boolean clocked;
+    private Boolean clocked = false;
 	
 	public Clock() {
 		super();
