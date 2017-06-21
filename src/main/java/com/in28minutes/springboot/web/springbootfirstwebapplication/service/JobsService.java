@@ -25,11 +25,19 @@ public class JobsService {
 		return jobsRepository.findByCustomerName(customer);
 	}
 	
-	public double findBalanceDueByCustomerName(String customerName) {
-		return jobsRepository.findAmountDueByCustomerName(customerName);
+	public double findTotalAmountChargedById(int id) {
+		return jobsRepository.findAmountDueById(id);
 	}
 	
-	public void updateAmountDueByCustomerName(int id, double amountPaid, double amountDue) {
+	public double findBalanceDueById(int id) {
+		return jobsRepository.findAmountDueById(id);
+	}
+	
+	public double findAmountPaidById(int id) {
+		return jobsRepository.findAmountPaidById(id);
+	}
+	
+	public void updateAmountDueById(int id, double amountPaid, double amountDue) {
 		jobsRepository.updateAmountDue(id, amountPaid, amountDue);
 	}
 	
@@ -37,13 +45,29 @@ public class JobsService {
 		return jobsRepository.findIdByCustomerName(customerName);
 	}
 	
+	public void isPaid(int id, Boolean bool) {
+		jobsRepository.isPaid(id, bool);
+	}
+	
+	public void checkIfPaid(int id, double totalPaid) {
+		double totalAmountCharged = findTotalAmountChargedById(id);
+		Boolean paid = true;
+		
+		if (totalAmountCharged == totalPaid) {
+			isPaid(id, paid);
+		}
+	}
+	
 	public void addPayment(String customerName, double amountPaid) {
 		PaymentLogic pl = new PaymentLogic();
-		double amountDue = jobsRepository.findAmountDueByCustomerName(customerName);
 		int id = findIdByCustomerName(customerName);
+		double amountDue = findBalanceDueById(id);
+		double totalAmountPaid = findAmountPaidById(id) + amountPaid;
 		pl.makePayment(amountDue, amountPaid);
 		double newAmountDue = pl.getBalanceDue();
-		jobsRepository.updateAmountDue(id, amountPaid, newAmountDue);
+		checkIfPaid(id, totalAmountPaid);
+		updateAmountDueById(id, totalAmountPaid, newAmountDue);
+		System.out.println(totalAmountPaid);
 	}
 	
 	public Jobs saveJobs(Jobs jobs) {

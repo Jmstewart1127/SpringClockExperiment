@@ -20,12 +20,16 @@ public class Jobs {
     private String category;
     @Column(name = "customer_name")
     private String customerName;
+    @Column(name = "amount_charged")
+    private double amountCharged;
     @Column(name = "amount_due")
     private double amountDue;
     @Column(name = "amount_paid")
-    private double amountPaid;
-    
-	public Jobs() {
+    private double amountPaid = 0;
+    @Column(name = "is_paid")
+    private Boolean isPayed = false;
+	
+    public Jobs() {
 		super();
 	}
 
@@ -68,6 +72,14 @@ public class Jobs {
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
 	}
+	
+	public double getAmountCharged() {
+		return amountCharged;
+	}
+
+	public void setAmountCharged(double amountCharged) {
+		this.amountCharged = amountCharged;
+	}
 
 	public double getAmountDue() {
 		return amountDue;
@@ -84,6 +96,15 @@ public class Jobs {
 	public void setAmountPaid(double amountPaid) {
 		this.amountPaid = amountPaid;
 	}
+
+	public Boolean getIsPayed() {
+		return isPayed;
+	}
+
+	public void setIsPayed(Boolean isPayed) {
+		this.isPayed = isPayed;
+	}
+	
 	
 	
 }

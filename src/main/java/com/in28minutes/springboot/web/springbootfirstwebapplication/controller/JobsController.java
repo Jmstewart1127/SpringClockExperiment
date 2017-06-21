@@ -45,7 +45,7 @@ public class JobsController {
 		if (bindingResult.hasErrors()) { 
 			modelAndView.setViewName("newuser");		
 		} else { 
-		        
+		    jobs.setAmountCharged(jobs.getAmountDue());    
 		    jobsService.saveJobs(jobs);
 		    
 			modelAndView.addObject(jobs.getJobName());
