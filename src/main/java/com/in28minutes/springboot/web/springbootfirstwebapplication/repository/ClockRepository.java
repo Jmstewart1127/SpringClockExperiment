@@ -19,6 +19,8 @@ public interface ClockRepository extends CrudRepository <Clock, Long> {
 	
 	Clock findByClocked(Boolean clocked);
 	
+	double findPayRateById(int id);
+	
 	@Query("SELECT clocked FROM com.in28minutes.springboot.web.springbootfirstwebapplication.model.Clock WHERE id= :id")
 	Boolean findClockedById(@Param("id")int id);
 	
@@ -36,10 +38,13 @@ public interface ClockRepository extends CrudRepository <Clock, Long> {
 
 	@Modifying
 	@Transactional
-	@Query("UPDATE com.in28minutes.springboot.web.springbootfirstwebapplication.model.Clock SET clock_out=:endTime, shift_time=:shiftTime, week_time=:weeklyTime, clocked=false WHERE id=:id")
+	@Query("UPDATE com.in28minutes.springboot.web.springbootfirstwebapplication.model.Clock SET "
+			+ "clock_out=:endTime, shift_time=:shiftTime, week_time=:weeklyTime, clocked=false WHERE id=:id")
 	void updateClock(@Param("id")int id, 
 			  @Param("endTime")Date endTime, 
 			  @Param("shiftTime")long shiftTime, 
 			  @Param("weeklyTime")long weeklyTime);
+			  //,@Param("totalPay")double totalPay);
+	//, total_pay=:totalPay
 	  
 }

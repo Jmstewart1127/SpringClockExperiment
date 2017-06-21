@@ -49,7 +49,7 @@ public class ClockController {
 			
 		if (bindingResult.hasErrors()) { 
 			modelAndView.setViewName("newuser");		
-		} else { // new user so we create user and send confirmation e-mail
+		} else { 
 		        
 		    clockService.saveClock(clock);
 		    

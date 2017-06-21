@@ -11,6 +11,19 @@
 </head>
 
 <body>
+	<nav th:fragment="navbar" class="navbar navbar-default">
+  		<div class="container-fluid">
+    		<div class="navbar-header">
+      			<a class="navbar-brand" href="#">WebSiteName</a>
+    	</div>
+    	<ul class="nav navbar-nav">
+      		<li class="active"><a href="#">Home</a></li>
+      		<li><a href="/adduser">Add User</a></li>
+      		<li><a href="/register">Register</a></li>
+      		<li><a href="/clock">Clock</a></li>
+    	</ul>
+  		</div>
+	</nav>
 	<form th:action="@{/registration}" method="get">
 		<button class="btn btn-md btn-warning btn-block" type="Submit">Go To Registration Page</button>
 	</form>	

@@ -19,6 +19,7 @@ public class ClockLogic {
 	private Date endTime;
 	private long shiftTime;
 	private long weeklyTime;
+	private double weeklyHours;
 	private ArrayList<Long> list  = new ArrayList<Long>(); 
 	
 	public ClockLogic() {}
@@ -55,6 +56,14 @@ public class ClockLogic {
 		this.weeklyTime = weeklyTime;
 	}
 	
+	public double getWeeklyHours() {
+		return weeklyHours;
+	}
+	
+	public void setWeeklyHours(double weeklyHours) {
+		this.weeklyHours = weeklyHours;
+	}
+	
 	private long calcShiftTime(Date start, Date end) {
 		long startTime = start.getTime();
 		long endTime = end.getTime();
@@ -71,11 +80,23 @@ public class ClockLogic {
 		long toAdd = sum + shift;
 		toAdd += currentWeek;
 		setWeeklyTime(toAdd);
-		return toAdd;
+		System.out.println(weeklyTime + " week");
+		
+		return weeklyTime;
 	}
 	
 	public void endShift(Date start, Date end) {
 		calcShiftTime(start, end);
+	}
+	
+	public double timeToHours(long time) {
+		double timeAsDouble = time;
+		
+		return timeAsDouble / 3600000;
+	}
+	
+	public double calculatePay(double time, double payRate) {
+		return time * payRate;
 	}
 	
 

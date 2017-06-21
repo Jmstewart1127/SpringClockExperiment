@@ -28,39 +28,14 @@ public class Clock {
 	private long weekTime;
     @Column(name = "is_clocked")
     private Boolean clocked = false;
+    @Column(name = "pay_rate")
+    private double payRate;
+    @Column(name = "total_pay")
+    private double totalPay;
+
 	
 	public Clock() {
 		super();
-	}
-	
-	public Clock(int id, String user, Date clockIn) {
-		
-		super();
-		this.id = id;
-		this.user = user;
-		this.clockIn = clockIn;
-	}
-	
-	public Clock(String user, Date clockOut, long shiftTime, 
-			long weekTime) {
-		
-		super();
-		this.user = user;
-		this.clockOut = clockOut;
-		this.shiftTime = shiftTime;
-		this.weekTime = weekTime;
-	}
-	
-	public Clock(int id, String user, Date clockIn, Date clockOut, long shiftTime, 
-			long weekTime) {
-		
-		super();
-		this.id = id;
-		this.user = user;
-		this.clockIn = clockIn;
-		this.clockOut = clockOut;
-		this.shiftTime = shiftTime;
-		this.weekTime = weekTime;
 	}
 
 	public int getId() {
@@ -126,6 +101,24 @@ public class Clock {
 	public void setClocked(Boolean clocked) {
 		this.clocked = clocked;
 	}
+
+	public double getPayRate() {
+		return payRate;
+	}
+
+	public void setPayRate(double payRate) {
+		this.payRate = payRate;
+	}
+
+	public double getTotalPay() {
+		return totalPay;
+	}
+
+	public void setTotalPay(double totalPay) {
+		this.totalPay = totalPay;
+	}
+	
+	
 	
 	
 	

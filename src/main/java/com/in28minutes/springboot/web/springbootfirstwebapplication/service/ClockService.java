@@ -15,10 +15,11 @@ public class ClockService {
 	@Autowired
 	ClockRepository clockRepository;
 
-	public void addNewUser (int bizId, String name) {
+	public void addNewUser (int bizId, String name, double payRate) {
 		Clock c = new Clock();
 		c.setBizId(bizId);
 		c.setUser(name);
+		c.setPayRate(payRate);
 		clockRepository.save(c);
 	}
 	
@@ -33,7 +34,11 @@ public class ClockService {
 		cl.endShift(clockRepository.findStartTimeById(id), d);
 		long currentWeek = clockRepository.findWeekTimeById(id);
 		long shift = cl.getShiftTime();
+		//double payRate = clockRepository.findPayRateById(id);
 		cl.calcWeeklyTime(currentWeek, shift);
+		double weeklyHours = cl.timeToHours(cl.getWeeklyTime());
+		//double weeklyPay = cl.calculatePay(weeklyHours, payRate);
+		System.out.println(weeklyHours);
 		clockRepository.updateClock(id, d, cl.getShiftTime(), cl.getWeeklyTime());
 	}
 	
