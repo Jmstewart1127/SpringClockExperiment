@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.in28minutes.pringbot.web.springbootfirstwebapplication.clocklogic;
+package com.in28minutes.pringbot.web.springbootfirstwebapplication.logistics;
 
 
 import java.util.ArrayList;

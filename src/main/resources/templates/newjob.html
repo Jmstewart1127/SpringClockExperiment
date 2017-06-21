@@ -36,44 +36,24 @@
     	</ul>
   		</div>
 	</nav>
-
   <div class="middle-box text-center loginscreen animated fadeInDown">
     <div>
       
-      <h4>New User Registration</h4>
+      <h4>New Employee</h4>
 
-      <form autocomplete="off" action="#" th:action="@{/register}"
-        th:object="${business}" method="post" class="m-t" role="form"
+      <form autocomplete="off" action="#" th:action="@{/newjob}"
+        th:object="${jobs}" method="post" class="m-t" role="form"
         data-toggle="validator">
 
-        <div th:if="${confirmationMessage}" class="alert alert-success"
-          role="alert" th:text=${confirmationMessage}></div>
-
-        <div th:if="${errorMessage}"
-          class="alert alert-danger" role="alert"
-          th:text="${errorMessage}"></div>
-
-
-        <div th:if="${#fields.hasErrors('bizName')}"
-          th:errors="*{bizName}"
-          class="validation-message alert alert-danger" role="alert"></div>
-
-        <div th:if="${#fields.hasErrors('adminName')}"
-          th:errors="*{adminName}"
-          class="validation-message alert alert-danger" role="alert"></div>
-
-        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
-          class="validation-message alert alert-danger" role="alert"></div>
-
         <div class="form-group input-group has-feedback">
-          <label th:if="${#fields.hasErrors('bizName')}"
-            th:errors="*{bizName}" class="validation-message"></label>
+          <label th:if="${#fields.hasErrors('jobName')}"
+            th:errors="*{jobName}" class="validation-message"></label>
           <span class="input-group-addon">
             <span class="glyphicon glyphicon-user"></span>
           </span>
           
-          <input type="text" th:field="*{bizName}"
-            placeholder="First Name" class="form-control" required />
+          <input type="text" th:field="*{jobName}"
+            placeholder="Job Name" class="form-control" required />
           <span class="glyphicon form-control-feedback"
             aria-hidden="true"></span>
         </div>
@@ -82,8 +62,38 @@
           <span class="input-group-addon">
             <span class="glyphicon glyphicon-user"></span>
           </span>
-          <input type="text" th:field="*{adminName}"
-            placeholder="Last Name" class="form-control" required />
+          <input type="text" th:field="*{jobAddress}"
+            placeholder="Job Address" class="form-control" required />
+          <span class="glyphicon form-control-feedback"
+            aria-hidden="true"></span>
+        </div>
+        
+        <div class="form-group input-group has-feedback">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-user"></span>
+          </span>
+          <input type="text" th:field="*{category}"
+            placeholder="Job Category" class="form-control" required />
+          <span class="glyphicon form-control-feedback"
+            aria-hidden="true"></span>
+        </div>
+        
+        <div class="form-group input-group has-feedback">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-user"></span>
+          </span>
+          <input type="text" th:field="*{customerName}"
+            placeholder="Customer Name" class="form-control" required />
+          <span class="glyphicon form-control-feedback"
+            aria-hidden="true"></span>
+        </div>
+        
+        <div class="form-group input-group has-feedback">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-user"></span>
+          </span>
+          <input type="text" th:field="*{amountDue}"
+            placeholder="Quoted Amount" class="form-control" required />
           <span class="glyphicon form-control-feedback"
             aria-hidden="true"></span>
         </div>
@@ -92,11 +102,6 @@
           <span class="input-group-addon">
             <span class="glyphicon glyphicon-envelope"></span>
           </span>
-          <input type="email" th:field="*{email}"
-            placeholder="Email Address" class="form-control"
-            data-error="This email address is invalid" required />
-          <span class="glyphicon form-control-feedback"
-            aria-hidden="true"></span>
 
         </div>
        
