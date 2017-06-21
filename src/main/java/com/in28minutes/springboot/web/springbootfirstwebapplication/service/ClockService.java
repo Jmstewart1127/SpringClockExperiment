@@ -34,12 +34,13 @@ public class ClockService {
 		cl.endShift(clockRepository.findStartTimeById(id), d);
 		long currentWeek = clockRepository.findWeekTimeById(id);
 		long shift = cl.getShiftTime();
-		//double payRate = clockRepository.findPayRateById(id);
+		double payRate = clockRepository.findPayRateById(id);
 		cl.calcWeeklyTime(currentWeek, shift);
 		double weeklyHours = cl.timeToHours(cl.getWeeklyTime());
-		//double weeklyPay = cl.calculatePay(weeklyHours, payRate);
+		double weeklyPay = cl.calculatePay(weeklyHours, payRate);
 		System.out.println(weeklyHours);
-		clockRepository.updateClock(id, d, cl.getShiftTime(), cl.getWeeklyTime());
+		System.out.println(weeklyPay);
+		clockRepository.updateClock(id, d, cl.getShiftTime(), cl.getWeeklyTime(), weeklyPay);
 	}
 	
 	public Boolean findClockedById(int id) {
