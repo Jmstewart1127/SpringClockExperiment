@@ -26,7 +26,7 @@ public class JobsService {
 	}
 	
 	public double findTotalAmountChargedById(int id) {
-		return jobsRepository.findAmountDueById(id);
+		return jobsRepository.findAmountChargedById(id);
 	}
 	
 	public double findBalanceDueById(int id) {
@@ -65,8 +65,8 @@ public class JobsService {
 		double totalAmountPaid = findAmountPaidById(id) + amountPaid;
 		pl.makePayment(amountDue, amountPaid);
 		double newAmountDue = pl.getBalanceDue();
-		checkIfPaid(id, totalAmountPaid);
 		updateAmountDueById(id, totalAmountPaid, newAmountDue);
+		checkIfPaid(id, totalAmountPaid);
 		System.out.println(totalAmountPaid);
 	}
 	

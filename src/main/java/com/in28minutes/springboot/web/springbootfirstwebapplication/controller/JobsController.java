@@ -93,4 +93,12 @@ public class JobsController {
 		return modelAndView;
 	}
 	
+	@RequestMapping(path="/jobs", method = RequestMethod.GET)
+	public ModelAndView showJobs(ModelAndView modelAndView, Jobs jobs) {
+		modelAndView.addObject("jobs", jobs);
+		modelAndView.setViewName("showjobs");
+		
+		return modelAndView;
+	}
+	
 }
