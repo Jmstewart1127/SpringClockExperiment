@@ -22,6 +22,14 @@ public class ClockController {
 	@Autowired
 	ClockService clockService;
 	
+    @RequestMapping(path="employees", method = RequestMethod.GET)
+    public ModelAndView showClock() {
+        ModelAndView mav = new ModelAndView("showemployees");
+        mav.addObject("clock", clockService.findByBizId(1));
+        
+        return mav;
+    }
+	
 	@RequestMapping(path="/adduser", method = RequestMethod.GET)
 	public ModelAndView showNewUserForm(ModelAndView modelAndView, Clock clock) {
 		modelAndView.addObject("clock", clock);

@@ -43,6 +43,10 @@ public class ClockService {
 		clockRepository.updateClock(id, d, cl.getShiftTime(), cl.getWeeklyTime(), weeklyPay);
 	}
 	
+	public Iterable<Clock> findByBizId(int bizId) {
+		return clockRepository.findByBizId(bizId);
+	}
+	
 	public Boolean findClockedById(int id) {
 		return clockRepository.findClockedById(id);
 	}

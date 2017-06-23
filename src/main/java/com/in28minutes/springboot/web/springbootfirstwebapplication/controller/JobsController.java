@@ -102,7 +102,7 @@ public class JobsController {
 	}
 	
     @RequestMapping(path="showjobs", method = RequestMethod.GET)
-    public ModelAndView messages() {
+    public ModelAndView showJobs() {
         ModelAndView mav = new ModelAndView("showjobs");
         mav.addObject("jobs", jobsService.findAll());
         
