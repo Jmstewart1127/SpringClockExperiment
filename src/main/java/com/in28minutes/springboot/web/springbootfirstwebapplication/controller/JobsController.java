@@ -6,6 +6,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -93,14 +94,6 @@ public class JobsController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(path="/jobs", method = RequestMethod.GET)
-	public ModelAndView showJobs(ModelAndView modelAndView, Jobs jobs) {
-		modelAndView.addObject("jobs", jobs);
-		modelAndView.setViewName("showjobs");
-		
-		return modelAndView;
-	}
-	
     @RequestMapping(path="showjobs", method = RequestMethod.GET)
     public ModelAndView showJobs() {
         ModelAndView mav = new ModelAndView("showjobs");
@@ -108,5 +101,38 @@ public class JobsController {
         
         return mav;
     }
+    
+	@RequestMapping(path="/update-jobs", method = RequestMethod.GET)
+	public ModelAndView showUpdateJobForm(ModelAndView modelAndView, Jobs jobs) {
+		modelAndView.addObject("jobs", jobs);
+		modelAndView.setViewName("newjob");
+		
+		return modelAndView;
+	}
+	
+
+    @RequestMapping(value="/jobs/{id}/update",method=RequestMethod.GET)
+    public String Edit(@PathVariable int id){
+    	jobsService.findById(id);
+    	
+    	return "updatejobs";
+    }
+    
+    @RequestMapping(value="/jobs/{id}/update",method=RequestMethod.POST)
+	public ModelAndView processJobEditForm(ModelAndView modelAndView,
+			@PathVariable int id,@Valid Jobs jobs, BindingResult bindingResult, 
+			HttpServletRequest request) {
+			
+		if (bindingResult.hasErrors()) { 
+			modelAndView.setViewName("updatejobstatus");		
+		} else { 
+ 
+			modelAndView.setViewName("jobupdated");
+		}
+			
+		return modelAndView;
+	}
+    
+    
 	
 }

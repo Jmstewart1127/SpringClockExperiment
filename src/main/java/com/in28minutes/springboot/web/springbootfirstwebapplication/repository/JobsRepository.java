@@ -17,6 +17,8 @@ public interface JobsRepository extends CrudRepository <Jobs, Long> {
 	
 	Jobs findByCustomerName(String customerName);
 	
+	Jobs deleteById(int id);
+	
 	@Query("SELECT amountCharged FROM com.in28minutes.springboot.web.springbootfirstwebapplication.model.Jobs"
 			+ " WHERE id= :id")
 	double findAmountChargedById(@Param("id")int id);
