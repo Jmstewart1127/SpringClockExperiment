@@ -120,15 +120,14 @@ public class JobsController {
     
     @RequestMapping(value="/jobs/{id}/update",method=RequestMethod.POST)
 	public ModelAndView processJobEditForm(ModelAndView modelAndView,
-			@PathVariable int id,@Valid Jobs jobs, BindingResult bindingResult, 
-			HttpServletRequest request) {
+			@PathVariable int id, HttpServletRequest request) {
 			
-		if (bindingResult.hasErrors()) { 
+
 			modelAndView.setViewName("updatejobstatus");		
-		} else { 
+
  
 			modelAndView.setViewName("jobupdated");
-		}
+		
 			
 		return modelAndView;
 	}

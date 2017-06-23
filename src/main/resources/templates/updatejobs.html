@@ -39,45 +39,11 @@
   <div class="middle-box text-center loginscreen animated fadeInDown">
     <div>
       
-      		<thead>
-			<tr>
-				<th>Job Name</th>
-				<th>Address</th>
-				<th>Category</th>
-				<th>Customer</th>
-				<th>Quote Amount</th>
-				<th>Amount Due</th>
-				<th>Amount Paid</th>
-				<th>Paid</th>
-			</tr>
-		</thead>
-
-
-    <tr th:each="jobs : ${jobs}">
-        <td th:text="${jobs.jobName}">1</td>
-        <td th:text="${jobs.jobAddress}">1</td>
-        <td th:text="${jobs.category}">1</td>
-        <td th:text="${jobs.customerName}">1</td>
-        <td th:text="${jobs.amountCharged}">1</td>
-        <td th:text="${jobs.amountDue}">1</td>
-        <td th:text="${jobs.amountPaid}">1</td>
-        <td th:text="${jobs.isPayed}">1</td>
-        <td><a type="button" class="btn btn-primary" th:href="@{/jobs/{id}/update(id=${jobs.id})}" th:text="Update"></a></td>
-		<td><a type="button" class="btn btn-danger" href="/delete-todo?id=${todo.id}">Delete</a></td>
-    </tr>
-      
       <h4>Update Job</h4>
 
       <form autocomplete="off" action="#" th:action="@{/update}"
         th:object="${jobs}" method="post" class="m-t" role="form"
         data-toggle="validator">
-       
-        <div class="form-group input-group has-feedback">
-          <label th:if="${#fields.hasErrors('jobName')}"
-            th:errors="*{jobName}" class="validation-message"></label>
-          <span class="input-group-addon">
-            <span class="glyphicon glyphicon-user"></span>
-          </span>
           
           <input type="text" th:field="*{jobName}"
             th:text="${jobs.jobName}"> class="form-control" required />
