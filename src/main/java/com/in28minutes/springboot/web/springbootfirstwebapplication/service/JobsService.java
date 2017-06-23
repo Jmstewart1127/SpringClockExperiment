@@ -17,6 +17,10 @@ public class JobsService {
 		return jobsRepository.findById(id);
 	}
 	
+	public Iterable<Jobs> findAll() {
+		return jobsRepository.findAll();
+	}
+	
 	public Jobs findByCategory(String category) {
 		return jobsRepository.findByCategory(category);
 	}

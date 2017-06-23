@@ -101,4 +101,12 @@ public class JobsController {
 		return modelAndView;
 	}
 	
+    @RequestMapping(path="showjobs", method = RequestMethod.GET)
+    public ModelAndView messages() {
+        ModelAndView mav = new ModelAndView("showjobs");
+        mav.addObject("jobs", jobsService.findAll());
+        
+        return mav;
+    }
+	
 }

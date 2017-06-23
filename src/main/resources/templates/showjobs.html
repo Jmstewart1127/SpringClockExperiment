@@ -18,29 +18,52 @@
   crossorigin="anonymous" />
 <link th:href="@{css/style.css}" rel="stylesheet" />
 
-<body>  
+<body>
+	<nav th:fragment="navbar" class="navbar navbar-default">
+  		<div class="container-fluid">
+    		<div class="navbar-header">
+      			<a class="navbar-brand" href="/login">Unlimited Solutions</a>
+    	</div>
+    	<ul class="nav navbar-nav">
+      		<li class="active"><a href="/newjob">Add Job</a></li>
+      		<li><a href="/adduser">Add User</a></li>
+      		<li><a href="/register">Register</a></li>
+      		<li><a href="/clock">Clock</a></li>
+    	</ul>
+  		</div>
+	</nav>  
 <div class="container">
 		<table class="table table-striped">
 	<caption></caption>
 		<thead>
 			<tr>
-				<th>Description</th>
-				<th>Target Date</th>
-				<th>Is it Done?</th>
-				<th>Update</th>
-				<th>Delete</th>
+				<th>Job Name</th>
+				<th>Address</th>
+				<th>Category</th>
+				<th>Customer</th>
+				<th>Quote Amount</th>
+				<th>Amount Due</th>
+				<th>Amount Paid</th>
+				<th>Paid</th>
 			</tr>
 		</thead>
 
-<th:block th:each="jobs : #{jobs}">
-    <tr>
-        <td th:text="#{jobs.jobName}">job</td>
+
+    <tr th:each="jobs : ${jobs}">
+        <td th:text="${jobs.jobName}">1</td>
+        <td th:text="${jobs.jobAddress}">1</td>
+        <td th:text="${jobs.category}">1</td>
+        <td th:text="${jobs.customerName}">1</td>
+        <td th:text="${jobs.amountCharged}">1</td>
+        <td th:text="${jobs.amountDue}">1</td>
+        <td th:text="${jobs.amountPaid}">1</td>
+        <td th:text="${jobs.isPayed}">1</td>
     </tr>
-</th:block>
+
 
 </table>
 <br>
-<div> <a class="button" href="/todo">Add a Todo</a></div>
+<div> <a class="button" href="/newjob">Add New Job</a></div>
 </div>
 
 </body>
