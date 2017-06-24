@@ -49,8 +49,8 @@ public class JobsService {
 		return jobsRepository.findIdByCustomerName(customerName);
 	}
 	
-	public Jobs deleteJobsById(int id) {
-		return jobsRepository.deleteById(id);
+	public void deleteJob(int id) {
+		jobsRepository.deleteJob(id);
 	}
 	
 	public void isPaid(int id, Boolean bool) {

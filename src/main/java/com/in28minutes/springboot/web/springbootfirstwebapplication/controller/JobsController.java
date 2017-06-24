@@ -102,36 +102,37 @@ public class JobsController {
         return mav;
     }
     
-	@RequestMapping(path="/update-jobs", method = RequestMethod.GET)
-	public ModelAndView showUpdateJobForm(ModelAndView modelAndView, Jobs jobs) {
+	@RequestMapping(value="/jobs/{id}/update", method = RequestMethod.GET)
+    public ModelAndView showUpdateJobsPage(ModelAndView modelAndView, @PathVariable int id) {
+		Jobs jobs = jobsService.findById(id);
 		modelAndView.addObject("jobs", jobs);
-		modelAndView.setViewName("newjob");
-		
-		return modelAndView;
+		modelAndView.setViewName("updatejobs");
+        return modelAndView;
 	}
-	
-
-    @RequestMapping(value="/jobs/{id}/update",method=RequestMethod.GET)
-    public String Edit(@PathVariable int id){
-    	jobsService.findById(id);
-    	
-    	return "updatejobs";
-    }
     
     @RequestMapping(value="/jobs/{id}/update",method=RequestMethod.POST)
 	public ModelAndView processJobEditForm(ModelAndView modelAndView,
-			@PathVariable int id, HttpServletRequest request) {
+			@PathVariable int id,@Valid Jobs jobs, BindingResult bindingResult, 
+			HttpServletRequest request) {
 			
-
+		if (bindingResult.hasErrors()) { 
 			modelAndView.setViewName("updatejobstatus");		
-
+		} else { 
  
-			modelAndView.setViewName("jobupdated");
-		
+			modelAndView.setViewName("showjobs");
+			jobsService.saveJobs(jobs);
+		}
 			
 		return modelAndView;
 	}
     
-    
+	@RequestMapping(value="/jobs/{id}/delete", method = RequestMethod.GET)
+    public ModelAndView deleteJob(ModelAndView modelAndView, @Valid Jobs jobs, @PathVariable int id) {
+		jobsService.deleteJob(id);
+		modelAndView.addObject(jobs);
+		modelAndView.setViewName("showjobs");
+		jobsService.deleteJob(id);
+        return modelAndView;
+	}
 	
 }

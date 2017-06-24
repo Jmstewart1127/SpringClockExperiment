@@ -50,4 +50,11 @@ public interface JobsRepository extends CrudRepository <Jobs, Long> {
 	void updateAmountDue(@Param("id")int id,
 			  @Param("amountPaid")double amountPaid,
 			  @Param("amountDue")double amountDue); 
+	
+	@Modifying
+	@Transactional
+	@Query("DELETE FROM com.in28minutes.springboot.web.springbootfirstwebapplication.model.Jobs WHERE id=:id")
+	void deleteJob(@Param("id")int id);
+	
+	
 }
