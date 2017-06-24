@@ -14,6 +14,10 @@ public class HistoryService {
 	@Autowired
 	HistoryRepository historyRepository;
 	
+	public void saveHistory(History history) {
+		historyRepository.save(history);
+	}
+	
 	public void addNewUser(int bizId, String user) {
 		History h = new History();
 		h.setBizId(bizId);

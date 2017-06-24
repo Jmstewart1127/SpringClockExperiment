@@ -36,11 +36,11 @@ public class ClockService {
 		long shift = cl.getShiftTime();
 		double payRate = clockRepository.findPayRateById(id);
 		cl.calcWeeklyTime(currentWeek, shift);
+		double exactWeeklyTime = cl.longToDoubleInHours(cl.getWeeklyTime());
+		System.out.println(exactWeeklyTime);
 		double weeklyHours = cl.timeToHours(cl.getWeeklyTime());
-		double weeklyPay = cl.calculatePay(weeklyHours, payRate);
-		System.out.println(weeklyHours);
-		System.out.println(weeklyPay);
-		clockRepository.updateClock(id, d, cl.getShiftTime(), cl.getWeeklyTime(), weeklyPay);
+		double weeklyPay = cl.calculatePay(exactWeeklyTime, payRate);
+		clockRepository.updateClock(id, d, cl.getShiftTime(), cl.getWeeklyTime(), weeklyHours, weeklyPay);
 	}
 	
 	public Iterable<Clock> findByBizId(int bizId) {
@@ -61,6 +61,10 @@ public class ClockService {
 	
 	public Clock findByClocked(Boolean clocked) {
 		return clockRepository.findByClocked(clocked);
+	}
+	
+	public void delete(Clock clock) {
+		clockRepository.delete(clock);
 	}
 	
 	public Clock saveClock(Clock clock) {

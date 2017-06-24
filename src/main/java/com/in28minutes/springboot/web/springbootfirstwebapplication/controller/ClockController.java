@@ -6,12 +6,14 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.in28minutes.springboot.web.springbootfirstwebapplication.model.Clock;
+import com.in28minutes.springboot.web.springbootfirstwebapplication.model.Jobs;
 import com.in28minutes.springboot.web.springbootfirstwebapplication.service.ClockService;
 import com.in28minutes.springboot.web.springbootfirstwebapplication.service.HistoryService;
 
@@ -22,7 +24,7 @@ public class ClockController {
 	@Autowired
 	ClockService clockService;
 	
-    @RequestMapping(path="employees", method = RequestMethod.GET)
+    @RequestMapping(path="/employees", method = RequestMethod.GET)
     public ModelAndView showClock() {
         ModelAndView mav = new ModelAndView("showemployees");
         mav.addObject("clock", clockService.findByBizId(1));
@@ -94,6 +96,38 @@ public class ClockController {
 			return modelAndView;
 		}
 
+	}
+	
+	@RequestMapping(value="/employee/{id}/update", method = RequestMethod.GET)
+    public ModelAndView showUpdateJobsPage(ModelAndView modelAndView, @PathVariable int id) {
+		Clock clock = clockService.findById(id);
+		modelAndView.addObject("clock", clock);
+		modelAndView.setViewName("updateemployee");
+        return modelAndView;
+	}
+    
+    @RequestMapping(value="/employee/{id}/update",method=RequestMethod.POST)
+	public ModelAndView processJobEditForm(ModelAndView modelAndView,
+			@PathVariable int id,@Valid Clock clock, BindingResult bindingResult, 
+			HttpServletRequest request) {
+			
+		if (bindingResult.hasErrors()) { 
+			modelAndView.setViewName("updatejobstatus");		
+		} else { 
+ 
+			modelAndView.setViewName("showemployees");
+			clockService.saveClock(clock);
+		}
+			
+		return modelAndView;
+	}
+    
+	@RequestMapping(value="/employee/{id}/delete", method = RequestMethod.GET)
+    public ModelAndView deleteJob(ModelAndView modelAndView, @Valid Clock clock, @PathVariable int id) {
+		modelAndView.addObject(clock);
+		modelAndView.setViewName("showemployees");
+		clockService.delete(clock);
+        return modelAndView;
 	}
 	
 

@@ -35,18 +35,26 @@ public interface ClockRepository extends CrudRepository <Clock, Long> {
 	
 	@Modifying
 	@Transactional
-	@Query("UPDATE com.in28minutes.springboot.web.springbootfirstwebapplication.model.Clock SET clock_in=:startTime, clocked=true WHERE id=:id")
+	@Query("UPDATE com.in28minutes.springboot.web.springbootfirstwebapplication.model.Clock "
+			+ "SET clock_in=:startTime, clocked=true WHERE id=:id")
 	void updateClock(@Param("id")int id, 
 			  @Param("startTime")Date startTime); 
 
 	@Modifying
 	@Transactional
 	@Query("UPDATE com.in28minutes.springboot.web.springbootfirstwebapplication.model.Clock SET "
-			+ "clock_out=:endTime, shift_time=:shiftTime, week_time=:weeklyTime, total_pay=:totalPay, clocked=false WHERE id=:id")
+			+ "clock_out=:endTime, shift_time=:shiftTime, week_time=:weeklyTime, "
+			+ "week_time_in_hours=:weeklyTimeInHours, total_pay=:totalPay, clocked=false WHERE id=:id")
 	void updateClock(@Param("id")int id, 
 			  @Param("endTime")Date endTime, 
 			  @Param("shiftTime")long shiftTime, 
 			  @Param("weeklyTime")long weeklyTime,
+			  @Param("weeklyTimeInHours")double weeklyTimeInHours,
 			  @Param("totalPay")double totalPay);
+	
+	@Modifying
+	@Transactional
+	@Query("DELETE FROM com.in28minutes.springboot.web.springbootfirstwebapplication.model.Clock WHERE id=:id")
+	void deleteClock(@Param("id")int id);
 	  
 }

@@ -26,6 +26,8 @@ public class Clock {
 	private long shiftTime; 
     @Column(name = "week_time")
 	private long weekTime;
+    @Column(name = "week_time_in_hours")
+    private double weekTimeInHours;
     @Column(name = "is_clocked")
     private Boolean clocked = false;
     @Column(name = "pay_rate")
@@ -92,6 +94,14 @@ public class Clock {
 
 	public void setWeekTime(long weekTime) {
 		this.weekTime = weekTime;
+	}
+
+	public double getWeekTimeInHours() {
+		return weekTimeInHours;
+	}
+
+	public void setWeekTimeInHours(double weekTimeInHours) {
+		this.weekTimeInHours = weekTimeInHours;
 	}
 
 	public Boolean getClocked() {

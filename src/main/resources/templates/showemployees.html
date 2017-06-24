@@ -58,12 +58,14 @@
         <td th:text="${clock.totalPay}">1</td>
         <td th:text="${clock.payRate}">1</td>
         <td th:text="${clock.clocked}">1</td>
+         <td><a type="button" class="btn btn-primary" th:href="@{/employee/{id}/update(id=${clock.id})}" th:text="Update"></a></td>
+		<td><a type="button" class="btn btn-danger" th:href="@{/employee/{id}/delete(id=${clock.id})}" th:text="Delete"></a></td>
     </tr>
 
 
 </table>
 <br>
-<div> <a class="button" href="/newclock">Add New Job</a></div>
+<div> <a class="button" href="/adduser">Add New Employee</a></div>
 </div>
 
 </body>

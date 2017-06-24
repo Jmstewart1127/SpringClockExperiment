@@ -3,7 +3,6 @@
  */
 package com.in28minutes.pringbot.web.springbootfirstwebapplication.logistics;
 
-
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -91,8 +90,15 @@ public class ClockLogic {
 	
 	public double timeToHours(long time) {
 		double timeAsDouble = time;
+		double timeInHours = timeAsDouble / 3600000;
+		double finalTime = (double)Math.round(timeInHours * 100d) / 100d;
+		return finalTime;
+	}
+	
+	public double longToDoubleInHours(long aLong) {
+		double longToDouble = aLong;
 		
-		return timeAsDouble / 3600000;
+		return longToDouble / 3600000;
 	}
 	
 	public double calculatePay(double time, double payRate) {
