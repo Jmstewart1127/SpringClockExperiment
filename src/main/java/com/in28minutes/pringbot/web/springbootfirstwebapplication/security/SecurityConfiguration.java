@@ -32,54 +32,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+          .inMemoryAuthentication()
+          .withUser("admin").password("password").roles("ADMIN");
+    }
+ 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests()
-                    .antMatchers("/resources/**", "/registration").permitAll()
-                    .anyRequest().authenticated()
-                    .and()
-                .formLogin()
-                    .loginPage("/login")
-                    .permitAll()
-                    .and()
-                .logout()
-                    .permitAll();
+          .httpBasic().and()
+          .authorizeRequests()
+          .antMatchers("/").hasRole("ADMIN")
+          .anyRequest().authenticated();
     }
-
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.businessService(businessService).passwordEncoder(bCryptPasswordEncoder());
-//    }
-//	
-	
-	
-	
-	
-//	// Create Users - jake, password: 'password'
-//	@Autowired
-//	public void configureGlobalSecurity(AuthenticationManagerBuilder auth)
-//			throws Exception {
-//		auth.inMemoryAuthentication().withUser("in28Minutes").password("dummy")
-//				.roles("USER", "ADMIN");
-//	}
-//	
-//	@Autowired
-//	DataSource dataSource;
-// 
-//	@Autowired
-//	public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-//		auth.jdbcAuthentication().dataSource(dataSource)
-//				.usersByUsernameQuery("select bizName, password, enabled from Business where bizName=?");
-//	}
-// 
-//	@Override
-//	protected void configure(HttpSecurity http) throws Exception {
-//		http.authorizeRequests().antMatchers("/", "/home").permitAll().antMatchers("/admin").hasRole("ADMIN")
-//				.anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll().and().logout()
-//				.permitAll();
-//		http.exceptionHandling().accessDeniedPage("/403");
-//	}
 
 	
 }
