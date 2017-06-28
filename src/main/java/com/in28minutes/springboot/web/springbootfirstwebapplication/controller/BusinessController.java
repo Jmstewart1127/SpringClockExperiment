@@ -8,6 +8,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -181,25 +183,24 @@ public class BusinessController {
 		}
 		
 		@RequestMapping(value="/login", method = RequestMethod.GET)
-		public ModelAndView loginBusiness(ModelAndView modelAndView, 
-				BindingResult bindingResult, 
-				@RequestParam Map requestParams, 
-				RedirectAttributes redir) {
+		public ModelAndView loginBusiness(ModelAndView modelAndView, Business business) {
 			
 			modelAndView.setViewName("login");
-			
-			String email = (String) requestParams.get("email");
-			String password = (String) requestParams.get("password");
-			
-			// find users by email
-			businessService.findByEmail(email);
-			
-			// find user by password
-			businessService.findByPassword(password);
-			
+			modelAndView.addObject(business);
 			
 			return modelAndView;
 		}
+
+		@RequestMapping(value="/admin/home", method = RequestMethod.GET)
+		public ModelAndView home(){
+			ModelAndView modelAndView = new ModelAndView();
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			Business business = businessService.findByEmail(auth.getName());
+			modelAndView.addObject("userName", "Welcome " + business.getBizName() +   " (" + business.getEmail() + ")");
+			modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
+			modelAndView.setViewName("adminhome");
+			return modelAndView;
+	}
 }
 	
 

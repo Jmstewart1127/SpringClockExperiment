@@ -125,13 +125,14 @@ public class JobsController {
 			
 		return modelAndView;
 	}
-    
+   
 	@RequestMapping(value="/jobs/{id}/delete", method = RequestMethod.GET)
     public ModelAndView deleteJob(ModelAndView modelAndView, @Valid Jobs jobs, @PathVariable int id) {
 		modelAndView.addObject(jobs);
 		modelAndView.setViewName("showjobs");
 		jobsService.deleteJob(id);
         return modelAndView;
-	}
+	}    
+
 	
 }
