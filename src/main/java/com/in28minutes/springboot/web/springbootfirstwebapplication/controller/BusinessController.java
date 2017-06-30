@@ -193,10 +193,10 @@ public class BusinessController {
 
 		@RequestMapping(value="/login", method = RequestMethod.POST)
 		public ModelAndView home(ModelAndView modelAndView) {
-			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			Business business = businessService.findByEmail(auth.getName());
-			modelAndView.addObject("userName", "Welcome " + business.getBizName() +   " (" + business.getEmail() + ")");
-			modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
+//			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//			Business business = businessService.findByEmail(auth.getName());
+//			modelAndView.addObject("userName", "Welcome " + business.getBizName() +   " (" + business.getEmail() + ")");
+//			modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
 			modelAndView.setViewName("adminhome");
 			return modelAndView;
 	}
