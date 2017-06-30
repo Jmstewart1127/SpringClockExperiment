@@ -184,16 +184,15 @@ public class BusinessController {
 		
 		@RequestMapping(value="/login", method = RequestMethod.GET)
 		public ModelAndView loginBusiness(ModelAndView modelAndView, Business business) {
-			
+
 			modelAndView.setViewName("login");
 			modelAndView.addObject(business);
-			
+
 			return modelAndView;
 		}
 
-		@RequestMapping(value="/admin/home", method = RequestMethod.GET)
-		public ModelAndView home(){
-			ModelAndView modelAndView = new ModelAndView();
+		@RequestMapping(value="/login", method = RequestMethod.POST)
+		public ModelAndView home(ModelAndView modelAndView) {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			Business business = businessService.findByEmail(auth.getName());
 			modelAndView.addObject("userName", "Welcome " + business.getBizName() +   " (" + business.getEmail() + ")");
